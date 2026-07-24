@@ -489,7 +489,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
           </div>
         </section>
 
-        <section id="contact" className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24">
+        <section id="contact" className="px-5 py-20 sm:px-8 sm:py-24">
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-orange-400/25 bg-orange-500 p-7 text-[#160a02] sm:p-12" data-reveal="scale">
             <div className="absolute -left-20 -top-24 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
             <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-7 text-center">
