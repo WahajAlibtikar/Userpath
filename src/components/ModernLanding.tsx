@@ -111,6 +111,27 @@ const industries = [
   'الاتصالات',
 ];
 
+const direction = [
+  {
+    icon: Compass,
+    number: '01',
+    title: 'رؤيتنا',
+    text: 'أن تكون التجارب المبنية على فهم الإنسان أساسًا في تطوير المنتجات والخدمات، وأن يصبح صوت المستخدم حاضرًا في كل قرار مؤثر.',
+  },
+  {
+    icon: Feather,
+    number: '02',
+    title: 'رسالتنا',
+    text: 'مساعدة الجهات على فهم مستخدميها الحقيقيين، وتحويل البحث والرؤى إلى تجارب واضحة وفعّالة تحقق أهداف المستخدم والعمل معًا.',
+  },
+  {
+    icon: Target,
+    number: '03',
+    title: 'هدفنا',
+    text: 'تمكين الناس من تحقيق أهدافهم وتسهيل حياتهم؛ بتبسيط كل ما هو معقد، وإعادة الاهتمام لكل ما تم تجاهله.',
+  },
+];
+
 export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -428,6 +449,42 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
                   </span>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[var(--border)] bg-[var(--surface)] py-20 transition-colors duration-300 sm:py-24">
+          <div className="mx-auto max-w-6xl px-5 sm:px-8">
+            <div className="mb-10 grid items-end gap-5 md:grid-cols-2" data-reveal="up">
+              <div className="space-y-3">
+                <span className="text-xs font-black tracking-widest text-orange-400">وجهتنا</span>
+                <h2 className="text-3xl font-black tracking-tight sm:text-5xl">لماذا نعمل، وإلى أين نتجه.</h2>
+              </div>
+              <p className="max-w-xl leading-7 text-[var(--muted)] md:mr-auto">
+                المستخدم ليس آخر خطوة في عملية التصميم؛ بل هو من يقود الطريق منذ السؤال الأول وحتى التحقق من الحل.
+              </p>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {direction.map(({ icon: Icon, number, title, text }, index) => (
+                <article
+                  key={title}
+                  data-reveal="up"
+                  style={{ '--delay': `${index * 110}ms` } as React.CSSProperties}
+                  className="group relative min-h-64 overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--card)] p-6"
+                >
+                  <span className="absolute left-5 top-4 text-5xl font-black text-[var(--soft)] transition group-hover:text-orange-400/15">
+                    {number}
+                  </span>
+                  <div className="relative flex h-full flex-col">
+                    <span className="mb-12 grid h-11 w-11 place-items-center rounded-2xl bg-orange-500 text-white">
+                      <Icon className="h-5 w-5" />
+                    </span>
+                    <h3 className="mb-3 text-xl font-black">{title}</h3>
+                    <p className="text-sm leading-7 text-[var(--muted)]">{text}</p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
