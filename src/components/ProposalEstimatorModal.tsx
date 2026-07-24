@@ -93,10 +93,10 @@ export const ProposalEstimatorModal: React.FC<ProposalEstimatorModalProps> = ({
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      { id: 'ux-ui' as ServiceId, label: 'تصميم الواجهات والتجربة (UX/UI)' },
+                      { id: 'ux-ui' as ServiceId, label: 'تصميم الواجهات (UX/UI)' },
                       { id: 'design-systems' as ServiceId, label: 'أنظمة التصميم (Design Systems)' },
                       { id: 'ux-writing' as ServiceId, label: 'كتابة تجربة المستخدم (UX Writing)' },
-                      { id: 'app-dev' as ServiceId, label: 'موارد وتطوير التطبيقات (App Dev)' },
+                      { id: 'app-dev' as ServiceId, label: 'تطوير التطبيقات (App Dev)' },
                       { id: 'training' as ServiceId, label: 'الأكاديمية والتدريب (Training)' },
                     ].map((s) => {
                       const isSelected = proposal.services.includes(s.id);

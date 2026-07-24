@@ -153,43 +153,43 @@ export const DevResourcesCalculator: React.FC<DevResourcesCalculatorProps> = ({
 
             {/* 4. Engagement Model */}
             <div className="space-y-3 pt-4 border-t border-slate-800">
-              <label className="text-sm font-bold text-white block">4. نموذج التعاقد والعمل:</label>
+              <label className="text-sm font-bold text-white block">4. نموذج التعاقد:</label>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <button
                   type="button"
                   onClick={() => setEngagementType('dedicated')}
-                  className={`p-3 rounded-xl border text-center text-xs font-semibold transition-all ${
+                  className={`p-3 rounded-xl border text-center text-xs font-semibold whitespace-nowrap transition-all ${
                     engagementType === 'dedicated'
                       ? 'bg-orange-600 text-white border-orange-500'
                       : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                   id="model-dedicated"
                 >
-                  فريق مخصص (Dedicated Pod)
+                  فريق مخصص (Dedicated)
                 </button>
                 <button
                   type="button"
                   onClick={() => setEngagementType('project')}
-                  className={`p-3 rounded-xl border text-center text-xs font-semibold transition-all ${
+                  className={`p-3 rounded-xl border text-center text-xs font-semibold whitespace-nowrap transition-all ${
                     engagementType === 'project'
                       ? 'bg-orange-600 text-white border-orange-500'
                       : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                   id="model-project"
                 >
-                  تسليم حسب المشروع (Deliverable)
+                  حسب المشروع (Project)
                 </button>
                 <button
                   type="button"
                   onClick={() => setEngagementType('hourly')}
-                  className={`p-3 rounded-xl border text-center text-xs font-semibold transition-all ${
+                  className={`p-3 rounded-xl border text-center text-xs font-semibold whitespace-nowrap transition-all ${
                     engagementType === 'hourly'
                       ? 'bg-orange-600 text-white border-orange-500'
                       : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700'
                   }`}
                   id="model-hourly"
                 >
-                  عقد ساعات مرنة (Hourly On-Demand)
+                  بالساعة (Hourly)
                 </button>
               </div>
             </div>

@@ -11,12 +11,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { id: 'services', label: 'خدماتنا', icon: Layout },
-    { id: 'ux-writing-demo', label: 'كتابة تجربة المستخدم', icon: Feather },
+    { id: 'services', label: 'الخدمات', icon: Layout },
+    { id: 'ux-writing-demo', label: 'كتابة UX', icon: Feather },
     { id: 'ds-preview', label: 'أنظمة التصميم', icon: Layers },
-    { id: 'dev-calculator', label: 'موارد التطوير', icon: Code2 },
-    { id: 'training', label: 'الأكاديمية والتدريب', icon: GraduationCap },
-    { id: 'case-studies', label: 'معرض الأعمال', icon: Sparkles },
+    { id: 'dev-calculator', label: 'التطوير', icon: Code2 },
+    { id: 'training', label: 'التدريب', icon: GraduationCap },
+    { id: 'case-studies', label: 'الأعمال', icon: Sparkles },
   ];
 
   const handleNavClick = (id: string) => {
@@ -60,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
                   isActive
                     ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/50'

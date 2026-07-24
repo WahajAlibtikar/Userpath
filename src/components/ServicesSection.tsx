@@ -49,34 +49,39 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
           <button
             onClick={() => setActiveTab('all')}
-            className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
               activeTab === 'all'
                 ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/30'
                 : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
             }`}
             id="tab-service-all"
           >
-            كافة الخدمات (5)
+            الكل (5)
           </button>
           {SERVICES_DATA.map((service) => {
             const Icon = getIcon(service.iconName);
             const isSelected = activeTab === service.id;
+            const shortTabTitle = 
+              service.id === 'ux-ui' ? 'تصميم UX/UI' :
+              service.id === 'design-systems' ? 'أنظمة التصميم' :
+              service.id === 'ux-writing' ? 'كتابة UX' :
+              service.id === 'app-dev' ? 'تطوير التطبيقات' : 'التدريب';
             return (
               <button
                 key={service.id}
                 onClick={() => setActiveTab(service.id)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
                   isSelected
                     ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/30'
                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
                 }`}
                 id={`tab-service-${service.id}`}
               >
-                <Icon className="w-4 h-4" />
-                <span>{service.title.split('(')[0]}</span>
+                <Icon className="w-4 h-4 shrink-0" />
+                <span>{shortTabTitle}</span>
               </button>
             );
           })}
@@ -141,14 +146,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => setModalService(service)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold transition-colors text-center"
+                      className="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold transition-colors text-center whitespace-nowrap"
                       id={`btn-details-${service.id}`}
                     >
                       التفاصيل والمنهجية
                     </button>
                     <button
                       onClick={() => onSelectServiceForProposal(service.id)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-semibold shadow-md shadow-orange-600/20 transition-all flex items-center justify-center gap-1.5"
+                      className="w-full py-2.5 px-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-xs font-semibold shadow-md shadow-orange-600/20 transition-all flex items-center justify-center gap-1.5 whitespace-nowrap"
                       id={`btn-order-${service.id}`}
                     >
                       <span>طلب الخدمة</span>

@@ -73,7 +73,7 @@ export const UxWritingPlayground: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                   selectedCategory === cat
                     ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                     : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'

@@ -127,7 +127,7 @@ export function CheckoutCard() {
             <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800">
               <button
                 onClick={() => setActiveTab('preview')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === 'preview' ? 'bg-orange-600 text-white' : 'text-slate-400 hover:text-white'
                 }`}
                 id="ds-tab-preview"
@@ -137,7 +137,7 @@ export function CheckoutCard() {
               </button>
               <button
                 onClick={() => setActiveTab('code')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === 'code' ? 'bg-orange-600 text-white' : 'text-slate-400 hover:text-white'
                 }`}
                 id="ds-tab-code"
@@ -147,7 +147,7 @@ export function CheckoutCard() {
               </button>
               <button
                 onClick={() => setActiveTab('tokens')}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${
                   activeTab === 'tokens' ? 'bg-orange-600 text-white' : 'text-slate-400 hover:text-white'
                 }`}
                 id="ds-tab-tokens"

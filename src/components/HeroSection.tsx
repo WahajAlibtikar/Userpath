@@ -10,11 +10,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
   const HERO_IMAGE_PATH = '/src/assets/images/studio_hero_banner_1784865160789.jpg';
 
   const quickPillars = [
-    { id: 'ux-ui', label: 'UX/UI Design', icon: Layout, desc: 'تجربة وواجهات' },
-    { id: 'design-systems', label: 'Design Systems', icon: Layers, desc: 'أنظمة التصميم' },
-    { id: 'ux-writing', label: 'UX Writing', icon: Feather, desc: 'كتابة النصوص' },
-    { id: 'app-dev', label: 'App Dev Resources', icon: Code2, desc: 'تطوير وموارد' },
-    { id: 'training', label: 'Training & Bootcamps', icon: GraduationCap, desc: 'التدريب والورش' },
+    { id: 'ux-ui', label: 'UX/UI Design', icon: Layout },
+    { id: 'design-systems', label: 'أنظمة التصميم', icon: Layers },
+    { id: 'ux-writing', label: 'كتابة UX', icon: Feather },
+    { id: 'app-dev', label: 'تطوير التطبيقات', icon: Code2 },
+    { id: 'training', label: 'التدريب والورش', icon: GraduationCap },
   ];
 
   return (
@@ -57,7 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
             {/* Quick Service Pills */}
             <div className="space-y-3 pt-2">
               <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                اختر الخدمة للبدء والاطلاع على تفاصيلها:
+                اختر الخدمة للبدء:
               </p>
               <div className="flex flex-wrap gap-2">
                 {quickPillars.map((p) => {
@@ -66,10 +66,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
                     <button
                       key={p.id}
                       onClick={() => onSelectService(p.id)}
-                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/80 text-slate-200 hover:text-white text-xs sm:text-sm font-medium transition-all hover:bg-slate-800/80 shadow-sm"
+                      className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-800 hover:border-orange-500/80 text-slate-200 hover:text-white text-xs font-semibold whitespace-nowrap transition-all hover:bg-slate-800/80 shadow-sm"
                       id={`hero-pill-${p.id}`}
                     >
-                      <Icon className="w-4 h-4 text-orange-500" />
+                      <Icon className="w-4 h-4 text-orange-500 shrink-0" />
                       <span>{p.label}</span>
                     </button>
                   );
@@ -81,12 +81,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
               <button
                 onClick={onOpenProposal}
-                className="flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-base shadow-xl shadow-orange-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="flex items-center justify-center gap-3 px-7 py-3.5 rounded-2xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm whitespace-nowrap shadow-xl shadow-orange-600/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                 id="hero-btn-calculate-proposal"
               >
-                <Sparkles className="w-5 h-5" />
-                <span>حاسبة تكلفة ونطاق مشروعك</span>
-                <ArrowLeft className="w-5 h-5" />
+                <Sparkles className="w-4 h-4" />
+                <span>حاسبة تكلفة ونطاق المشروع</span>
+                <ArrowLeft className="w-4 h-4" />
               </button>
 
               <button
@@ -94,10 +94,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
                   const el = document.getElementById('services');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-base transition-colors"
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 hover:text-white font-semibold text-sm whitespace-nowrap transition-colors"
                 id="hero-btn-explore-services"
               >
-                <span>استكشف كافة الخدمات</span>
+                <span>استكشف الخدمات</span>
               </button>
             </div>
 

@@ -33,18 +33,18 @@ export const CaseStudiesSection: React.FC = () => {
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setFilter('all')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 filter === 'all'
                   ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
               }`}
               id="filter-cs-all"
             >
-              كافة المشاريع
+              الكل
             </button>
             <button
               onClick={() => setFilter('design-systems')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 filter === 'design-systems'
                   ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
@@ -55,7 +55,7 @@ export const CaseStudiesSection: React.FC = () => {
             </button>
             <button
               onClick={() => setFilter('ux-ui')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 filter === 'ux-ui'
                   ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
@@ -66,25 +66,25 @@ export const CaseStudiesSection: React.FC = () => {
             </button>
             <button
               onClick={() => setFilter('ux-writing')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 filter === 'ux-writing'
                   ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
               }`}
               id="filter-cs-writing"
             >
-              كتابة تجربة المستخدم
+              كتابة UX
             </button>
             <button
               onClick={() => setFilter('app-dev')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
                 filter === 'app-dev'
                   ? 'bg-orange-600 text-white shadow-md shadow-orange-600/30'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
               }`}
               id="filter-cs-appdev"
             >
-              موارد التطوير
+              التطوير
             </button>
           </div>
         </div>
