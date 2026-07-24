@@ -11,18 +11,18 @@ export const CaseStudiesSection: React.FC = () => {
     : CASE_STUDIES_DATA.filter(cs => cs.category === filter);
 
   return (
-    <section id="case-studies" className="py-20 bg-slate-950 text-slate-100 border-b border-slate-800 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="case-studies" className="py-16 sm:py-20 bg-slate-950 text-slate-100 border-b border-slate-800 relative">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-5">
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>معرض المخرجات والنتائج</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              قصص نجاح ومشاريع حقيقية أحدثت أثراً ملموساً
+              نتائج مختارة من أعمالنا
             </h2>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
               استكشف نماذج تسليمات Userpath في تصميم الأنظمة، إعادة كتابة الواجهات، وتزويد كفاءات التطوير.
@@ -90,14 +90,14 @@ export const CaseStudiesSection: React.FC = () => {
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {filteredCaseStudies.map((cs) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {filteredCaseStudies.slice(0, 2).map((cs) => (
             <div
               key={cs.id}
-              className="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden hover:border-orange-500/40 transition-all flex flex-col justify-between group shadow-xl"
+              className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden hover:border-orange-500/40 transition-all flex flex-col justify-between group"
               id={`case-study-card-${cs.id}`}
             >
-              <div className="relative h-56 overflow-hidden">
+              <div className="relative h-44 overflow-hidden">
                 <img
                   src={cs.imageUrl}
                   alt={cs.title}
@@ -112,7 +112,7 @@ export const CaseStudiesSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-7 space-y-5">
+              <div className="p-5 sm:p-6 space-y-4">
                 <div>
                   <span className="text-xs text-slate-400 font-medium">{cs.client}</span>
                   <h3 className="text-xl font-bold text-white group-hover:text-orange-300 transition-colors pt-1">
