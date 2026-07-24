@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Menu, X, Sparkles, ArrowLeft, PhoneCall, GraduationCap, Code2, Layout, Feather } from 'lucide-react';
+import { Layers, Menu, X, Sparkles, ArrowLeft, Layout, BriefcaseBusiness, CircleHelp } from 'lucide-react';
 
 interface NavbarProps {
   onOpenProposal: () => void;
@@ -12,11 +12,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
 
   const navItems = [
     { id: 'services', label: 'الخدمات', icon: Layout },
-    { id: 'ux-writing-demo', label: 'كتابة UX', icon: Feather },
-    { id: 'ds-preview', label: 'أنظمة التصميم', icon: Layers },
-    { id: 'dev-calculator', label: 'التطوير', icon: Code2 },
-    { id: 'training', label: 'التدريب', icon: GraduationCap },
-    { id: 'case-studies', label: 'الأعمال', icon: Sparkles },
+    { id: 'case-studies', label: 'أعمالنا', icon: BriefcaseBusiness },
+    { id: 'faq', label: 'الأسئلة', icon: CircleHelp },
   ];
 
   const handleNavClick = (id: string) => {
@@ -30,7 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
 
   return (
     <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 text-slate-100 transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
         
         {/* Logo & Brand Name */}
         <div 
@@ -38,21 +35,21 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
           className="flex items-center gap-3 cursor-pointer group"
           id="brand-logo"
         >
-          <div className="w-11 h-11 rounded-xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-600/30 group-hover:bg-orange-500 transition-colors">
-            <Layers className="w-6 h-6" />
+          <div className="w-9 h-9 rounded-xl bg-orange-600 flex items-center justify-center text-white shadow-lg shadow-orange-600/20 group-hover:bg-orange-500 transition-colors">
+            <Layers className="w-5 h-5" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-black text-2xl tracking-tight text-orange-500 font-sans">
+              <span className="font-black text-xl tracking-tight text-orange-500 font-sans">
                 userpath
               </span>
             </div>
-            <p className="text-xs text-slate-400 font-medium">UX/UI & Systems Studio</p>
+            <p className="hidden sm:block text-[10px] text-slate-400 font-medium">UX/UI & Systems Studio</p>
           </div>
         </div>
 
         {/* Desktop Nav Items */}
-        <nav className="hidden lg:flex items-center gap-1 bg-slate-800/60 p-1.5 rounded-full border border-slate-700/60">
+        <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -88,7 +85,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
         </div>
 
         {/* Mobile Menu Toggle Button */}
-        <div className="lg:hidden flex items-center gap-2">
+        <div className="md:hidden flex items-center gap-2">
           <button
             onClick={onOpenProposal}
             className="px-3 py-1.5 rounded-lg bg-orange-600 text-white text-xs font-bold flex items-center gap-1"
@@ -109,7 +106,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenProposal, activeSection, s
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-slate-900 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2">
+        <div className="md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-3 pb-6 space-y-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
