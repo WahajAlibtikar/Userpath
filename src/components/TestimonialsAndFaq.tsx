@@ -49,11 +49,11 @@ export const TestimonialsAndFaq: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-slate-900 text-slate-100 border-b border-slate-800 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+    <section id="faq" className="py-16 sm:py-20 bg-slate-900 text-slate-100 border-b border-slate-800 relative">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 space-y-14">
         
         {/* Testimonials Block */}
-        <div className="space-y-12">
+        <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
               <MessageSquare className="w-4 h-4" />
@@ -64,11 +64,11 @@ export const TestimonialsAndFaq: React.FC = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, idx) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {testimonials.slice(0, 2).map((t, idx) => (
               <div
                 key={idx}
-                className="bg-slate-950 p-6 sm:p-7 rounded-3xl border border-slate-800 space-y-6 flex flex-col justify-between relative shadow-xl"
+                className="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-5 flex flex-col justify-between relative"
               >
                 <div className="space-y-4">
                   <div className="flex text-amber-400 gap-1">
@@ -94,7 +94,7 @@ export const TestimonialsAndFaq: React.FC = () => {
         </div>
 
         {/* FAQ Accordion */}
-        <div className="max-w-3xl mx-auto space-y-8 pt-8 border-t border-slate-800">
+        <div className="max-w-3xl mx-auto space-y-6 pt-10 border-t border-slate-800">
           <div className="text-center space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-bold uppercase tracking-wider">
               <HelpCircle className="w-4 h-4" />
