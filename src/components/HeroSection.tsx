@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowLeft, Sparkles, CheckCircle2, Layers, Code2, Layout } from 'lucide-react';
+import heroBanner from '../assets/images/studio_hero_banner_1784865160789.jpg';
 
 interface HeroSectionProps {
   onOpenProposal: () => void;
@@ -68,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSele
         <div className="lg:col-span-5">
           <div className="relative overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 p-3 shadow-2xl shadow-black/30">
             <img
-              src="/src/assets/images/studio_hero_banner_1784865160789.jpg"
+              src={heroBanner}
               alt="استوديو Userpath للمنتجات الرقمية"
               className="h-72 w-full rounded-2xl object-cover sm:h-80"
             />
