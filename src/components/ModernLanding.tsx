@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ArrowLeft,
   ArrowUpLeft,
   BarChart3,
-  BookOpen,
   CheckCircle2,
-  ChevronDown,
   Compass,
   Feather,
   Globe2,
   Layers3,
   Menu,
   Microscope,
+  Moon,
   MousePointer2,
   PenTool,
   Search,
   ShieldCheck,
   Sparkles,
+  Sun,
   Target,
   Users,
   X,
@@ -113,6 +113,42 @@ const industries = [
 
 export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('userpath-theme');
+    if (saved === 'light' || saved === 'dark') return saved;
+    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('userpath-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
+
+  const palette = theme === 'dark'
+    ? {
+        '--page-bg': '#080b0f',
+        '--surface': '#0d1117',
+        '--card': '#080b0f',
+        '--header': 'rgba(8, 11, 15, 0.88)',
+        '--text': '#ffffff',
+        '--muted': '#94a3b8',
+        '--subtle': '#64748b',
+        '--border': 'rgba(255, 255, 255, 0.08)',
+        '--soft': 'rgba(255, 255, 255, 0.035)',
+        '--hover': 'rgba(255, 255, 255, 0.07)',
+      }
+    : {
+        '--page-bg': '#faf9f7',
+        '--surface': '#f1f0ed',
+        '--card': '#ffffff',
+        '--header': 'rgba(250, 249, 247, 0.9)',
+        '--text': '#172033',
+        '--muted': '#526078',
+        '--subtle': '#778297',
+        '--border': 'rgba(23, 32, 51, 0.11)',
+        '--soft': 'rgba(23, 32, 51, 0.035)',
+        '--hover': 'rgba(23, 32, 51, 0.065)',
+      };
 
   const goTo = (id: string) => {
     setMenuOpen(false);
@@ -120,8 +156,12 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#080b0f] text-white">
-      <header className="sticky top-0 z-40 border-b border-white/8 bg-[#080b0f]/88 backdrop-blur-xl">
+    <div
+      className="min-h-screen overflow-x-hidden bg-[var(--page-bg)] text-[var(--text)] transition-colors duration-300"
+      style={palette as React.CSSProperties}
+      data-theme={theme}
+    >
+      <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header)] backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-orange-500 text-white">
@@ -130,13 +170,21 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
             <span className="text-xl font-black tracking-tight">user<span className="text-orange-500">path</span></span>
           </button>
 
-          <nav className="hidden items-center gap-7 text-sm text-slate-300 md:flex">
-            <button onClick={() => goTo('services')} className="transition hover:text-white">الخدمات</button>
-            <button onClick={() => goTo('why-us')} className="transition hover:text-white">لماذا نحن</button>
-            <button onClick={() => goTo('contact')} className="transition hover:text-white">تواصل معنا</button>
+          <nav className="hidden items-center gap-7 text-sm text-[var(--muted)] md:flex">
+            <button onClick={() => goTo('services')} className="transition hover:text-orange-500">الخدمات</button>
+            <button onClick={() => goTo('why-us')} className="transition hover:text-orange-500">لماذا نحن</button>
+            <button onClick={() => goTo('contact')} className="transition hover:text-orange-500">تواصل معنا</button>
           </nav>
 
           <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="grid h-10 w-10 place-items-center rounded-xl border border-[var(--border)] bg-[var(--soft)] text-[var(--muted)] transition hover:bg-[var(--hover)] hover:text-orange-500"
+              aria-label={theme === 'dark' ? 'تفعيل الوضع الفاتح' : 'تفعيل الوضع الداكن'}
+              title={theme === 'dark' ? 'الوضع الفاتح' : 'الوضع الداكن'}
+            >
+              {theme === 'dark' ? <Sun className="h-4.5 w-4.5" /> : <Moon className="h-4.5 w-4.5" />}
+            </button>
             <button
               onClick={onOpenProposal}
               className="hidden rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-bold transition hover:bg-orange-400 sm:block"
@@ -145,7 +193,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
             </button>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="rounded-xl border border-white/10 p-2 text-slate-300 md:hidden"
+              className="rounded-xl border border-[var(--border)] p-2 text-[var(--muted)] md:hidden"
               aria-label="القائمة"
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -154,13 +202,13 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         </div>
 
         {menuOpen && (
-          <div className="space-y-1 border-t border-white/8 px-5 py-4 md:hidden">
+          <div className="space-y-1 border-t border-[var(--border)] px-5 py-4 md:hidden">
             {[
               ['services', 'الخدمات'],
               ['why-us', 'لماذا نحن'],
               ['contact', 'تواصل معنا'],
             ].map(([id, label]) => (
-              <button key={id} onClick={() => goTo(id)} className="block w-full rounded-xl px-4 py-3 text-right text-sm text-slate-200 hover:bg-white/5">
+              <button key={id} onClick={() => goTo(id)} className="block w-full rounded-xl px-4 py-3 text-right text-sm text-[var(--muted)] hover:bg-[var(--hover)]">
                 {label}
               </button>
             ))}
@@ -187,7 +235,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
                   طوّر مشروعك
                   <span className="block text-orange-500">بفهم المستخدم.</span>
                 </h1>
-                <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+                <p className="max-w-2xl text-base leading-8 text-[var(--muted)] sm:text-lg">
                   نساعدك على اكتشاف ما يحتاجه المستخدم فعلًا، تصميم التجربة المناسبة، واختبارها قبل اتخاذ القرار.
                 </p>
               </div>
@@ -202,13 +250,13 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
                 </button>
                 <button
                   onClick={() => goTo('services')}
-                  className="inline-flex items-center justify-center rounded-xl border border-white/12 bg-white/4 px-6 py-3.5 text-sm font-semibold text-slate-200 transition hover:bg-white/8"
+                  className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--soft)] px-6 py-3.5 text-sm font-semibold text-[var(--text)] transition hover:bg-[var(--hover)]"
                 >
                   استكشف الخدمات
                 </button>
               </div>
 
-              <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-white/8 pt-5 text-xs text-slate-400">
+              <div className="flex flex-wrap gap-x-5 gap-y-2 border-t border-[var(--border)] pt-5 text-xs text-[var(--muted)]">
                 {['المستخدمون الحقيقيون', 'البحث والبيانات', 'فهم الثقافة', 'التحقق والاختبار'].map((item) => (
                   <span key={item} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-orange-400" />
@@ -219,7 +267,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.035] p-3">
+              <div className="relative rounded-[2rem] border border-[var(--border)] bg-[var(--soft)] p-3">
                 <img
                   src={new URL('../assets/images/studio_hero_banner_1784865160789.jpg', import.meta.url).href}
                   alt="فريق مسار المستخدم"
@@ -235,31 +283,31 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
           </div>
         </section>
 
-        <section id="services" className="border-y border-white/8 bg-[#0d1117] py-20 sm:py-24">
+        <section id="services" className="border-y border-[var(--border)] bg-[var(--surface)] py-20 transition-colors duration-300 sm:py-24">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div className="mb-10 max-w-2xl space-y-3">
               <span className="text-xs font-black tracking-widest text-orange-400">خدماتنا</span>
               <h2 className="text-3xl font-black tracking-tight sm:text-5xl">من السؤال الصحيح إلى تجربة أفضل.</h2>
-              <p className="leading-7 text-slate-400">خدمات متكاملة تساعدك على الفهم، التصميم، الاختبار، والتحسين المستمر.</p>
+              <p className="leading-7 text-[var(--muted)]">خدمات متكاملة تساعدك على الفهم، التصميم، الاختبار، والتحسين المستمر.</p>
             </div>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               {services.map(({ icon: Icon, title, label, text }, index) => (
                 <article
                   key={title}
-                  className="group flex gap-4 rounded-2xl border border-white/8 bg-[#080b0f] p-5 transition hover:border-orange-400/35 hover:bg-orange-400/[0.025]"
+                  className="group flex gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:border-orange-400/35 hover:bg-orange-400/[0.035]"
                 >
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-orange-400/20 bg-orange-400/8 text-orange-400">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0 space-y-2">
                     <div className="flex flex-wrap items-baseline gap-x-2">
-                      <h3 className="font-bold text-white">{title}</h3>
-                      <span className="text-[10px] uppercase tracking-wider text-slate-500">{label}</span>
+                      <h3 className="font-bold text-[var(--text)]">{title}</h3>
+                      <span className="text-[10px] uppercase tracking-wider text-[var(--subtle)]">{label}</span>
                     </div>
-                    <p className="text-sm leading-7 text-slate-400">{text}</p>
+                    <p className="text-sm leading-7 text-[var(--muted)]">{text}</p>
                   </div>
-                  <span className="mr-auto hidden text-xs text-slate-600 sm:block">0{index + 1}</span>
+                  <span className="mr-auto hidden text-xs text-[var(--subtle)] sm:block">0{index + 1}</span>
                 </article>
               ))}
             </div>
@@ -272,27 +320,27 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
               <div className="space-y-5 lg:col-span-4">
                 <span className="text-xs font-black tracking-widest text-orange-400">لماذا مسار المستخدم؟</span>
                 <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-4xl">بحث محلي.<br />قرارات أوضح.</h2>
-                <p className="leading-7 text-slate-400">
+                <p className="leading-7 text-[var(--muted)]">
                   خبرة متعددة القطاعات داخل المملكة، مع فهم ثقافي ولغوي يضع البحث في سياقه الصحيح.
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
                 {values.map(({ icon: Icon, title, text }) => (
-                  <article key={title} className="rounded-2xl border border-white/8 bg-white/[0.025] p-5">
+                  <article key={title} className="rounded-2xl border border-[var(--border)] bg-[var(--soft)] p-5">
                     <Icon className="mb-5 h-5 w-5 text-orange-400" />
                     <h3 className="mb-2 font-bold">{title}</h3>
-                    <p className="text-sm leading-7 text-slate-400">{text}</p>
+                    <p className="text-sm leading-7 text-[var(--muted)]">{text}</p>
                   </article>
                 ))}
               </div>
             </div>
 
-            <div className="mt-14 border-t border-white/8 pt-8">
-              <p className="mb-5 text-xs font-bold text-slate-500">خبرة عبر قطاعات متنوعة</p>
+            <div className="mt-14 border-t border-[var(--border)] pt-8">
+              <p className="mb-5 text-xs font-bold text-[var(--subtle)]">خبرة عبر قطاعات متنوعة</p>
               <div className="flex flex-wrap gap-2">
                 {industries.map((industry) => (
-                  <span key={industry} className="rounded-full border border-white/8 bg-white/[0.025] px-3 py-1.5 text-xs text-slate-300">
+                  <span key={industry} className="rounded-full border border-[var(--border)] bg-[var(--soft)] px-3 py-1.5 text-xs text-[var(--muted)]">
                     {industry}
                   </span>
                 ))}
@@ -323,11 +371,11 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         </section>
       </main>
 
-      <footer className="border-t border-white/8 py-8">
-        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-5 px-5 text-xs text-slate-500 sm:px-8 md:flex-row">
+      <footer className="border-t border-[var(--border)] py-8">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-5 px-5 text-xs text-[var(--subtle)] sm:px-8 md:flex-row">
           <div className="flex items-center gap-2">
             <Layers3 className="h-4 w-4 text-orange-500" />
-            <span className="font-bold text-slate-300">userpath</span>
+            <span className="font-bold text-[var(--text)]">userpath</span>
             <span>© 2026</span>
           </div>
           <a href="mailto:info@userpath.sa" className="transition hover:text-orange-400">info@userpath.sa</a>
