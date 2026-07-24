@@ -267,16 +267,96 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative rounded-[2rem] border border-[var(--border)] bg-[var(--soft)] p-3">
-                <img
-                  src={new URL('../assets/images/studio_hero_banner_1784865160789.jpg', import.meta.url).href}
-                  alt="فريق مسار المستخدم"
-                  className="h-[430px] w-full rounded-[1.5rem] object-cover"
-                />
-                <div className="absolute inset-x-7 bottom-7 rounded-2xl border border-white/10 bg-[#080b0f]/88 p-4 backdrop-blur-lg">
-                  <p className="text-xs leading-6 text-slate-300">
-                    «كلما ازداد فهمك للمستخدم، اقتربت من تقديم التجربة التي يبحث عنها ويحتاجها ويستحقها.»
-                  </p>
+              <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--card)] p-4 shadow-2xl shadow-orange-950/10">
+                <div className="absolute -left-16 -top-16 h-52 w-52 rounded-full bg-orange-500/12 blur-3xl" />
+                <svg
+                  viewBox="0 0 480 430"
+                  role="img"
+                  aria-labelledby="research-journey-title research-journey-desc"
+                  className="relative h-[430px] w-full"
+                >
+                  <title id="research-journey-title">رحلة فهم المستخدم</title>
+                  <desc id="research-journey-desc">رسم تجريدي يوضح انتقال المعرفة من المستخدم إلى البحث ثم إلى القرار</desc>
+                  <defs>
+                    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+                      <circle cx="2" cy="2" r="1.5" fill="var(--subtle)" opacity="0.25" />
+                    </pattern>
+                    <linearGradient id="orange-flow" x1="1" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#fb923c" />
+                      <stop offset="100%" stopColor="#f97316" />
+                    </linearGradient>
+                    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feDropShadow dx="0" dy="10" stdDeviation="12" floodColor="#f97316" floodOpacity="0.14" />
+                    </filter>
+                  </defs>
+
+                  <rect x="0" y="0" width="480" height="430" rx="28" fill="url(#dot-grid)" />
+
+                  <path
+                    d="M395 110 C335 105 334 202 272 208 C208 214 218 316 88 315"
+                    fill="none"
+                    stroke="var(--border)"
+                    strokeWidth="18"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M395 110 C335 105 334 202 272 208 C208 214 218 316 88 315"
+                    fill="none"
+                    stroke="url(#orange-flow)"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeDasharray="8 10"
+                  />
+
+                  <g transform="translate(350 64)" filter="url(#soft-shadow)">
+                    <rect width="92" height="92" rx="28" fill="var(--card)" stroke="var(--border)" strokeWidth="2" />
+                    <circle cx="46" cy="35" r="15" fill="#f97316" opacity="0.9" />
+                    <path d="M22 72 C24 52 68 52 70 72" fill="#f97316" opacity="0.35" />
+                    <circle cx="76" cy="17" r="7" fill="#22c55e" stroke="var(--card)" strokeWidth="3" />
+                  </g>
+
+                  <g transform="translate(204 156)" filter="url(#soft-shadow)">
+                    <rect width="126" height="106" rx="24" fill="var(--card)" stroke="#f97316" strokeOpacity="0.45" strokeWidth="2" />
+                    <rect x="19" y="20" width="88" height="10" rx="5" fill="var(--border)" />
+                    <rect x="19" y="42" width="56" height="8" rx="4" fill="#f97316" opacity="0.75" />
+                    <rect x="19" y="61" width="75" height="8" rx="4" fill="var(--border)" />
+                    <circle cx="98" cy="78" r="14" fill="#f97316" opacity="0.15" />
+                    <path d="M92 78 L97 83 L106 72" fill="none" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
+
+                  <g transform="translate(42 270)" filter="url(#soft-shadow)">
+                    <rect width="96" height="92" rx="28" fill="#f97316" />
+                    <path d="M27 48 L42 63 L70 31" fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
+
+                  <g transform="translate(58 86)">
+                    <rect width="126" height="70" rx="18" fill="var(--soft)" stroke="var(--border)" />
+                    <circle cx="26" cy="24" r="7" fill="#f97316" />
+                    <rect x="43" y="18" width="62" height="9" rx="4.5" fill="var(--border)" />
+                    <rect x="20" y="42" width="86" height="8" rx="4" fill="var(--border)" opacity="0.65" />
+                  </g>
+
+                  <g transform="translate(300 302)">
+                    <rect width="132" height="62" rx="18" fill="var(--soft)" stroke="var(--border)" />
+                    <rect x="20" y="17" width="19" height="28" rx="6" fill="#f97316" opacity="0.35" />
+                    <rect x="48" y="27" width="19" height="18" rx="6" fill="#f97316" opacity="0.65" />
+                    <rect x="76" y="10" width="19" height="35" rx="6" fill="#f97316" />
+                    <circle cx="111" cy="23" r="7" fill="#22c55e" />
+                  </g>
+
+                  {[145, 176, 330].map((x, index) => (
+                    <circle key={x} cx={x} cy={index === 2 ? 149 : 333 - index * 42} r="5" fill="#f97316" opacity={0.45 + index * 0.2} />
+                  ))}
+                </svg>
+
+                <div className="absolute inset-x-7 bottom-7 flex items-center justify-between gap-4 rounded-2xl border border-[var(--border)] bg-[var(--header)] p-4 backdrop-blur-lg">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500">User → Insight → Decision</p>
+                    <p className="mt-1 text-xs font-semibold text-[var(--text)]">نحوّل فهم المستخدم إلى قرار أوضح.</p>
+                  </div>
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-500 text-white">
+                    <ArrowUpLeft className="h-4 w-4" />
+                  </span>
                 </div>
               </div>
             </div>
