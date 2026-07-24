@@ -31,25 +31,25 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
     : SERVICES_DATA.filter((s) => s.id === activeTab);
 
   return (
-    <section id="services" className="py-20 bg-slate-900 text-slate-100 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-16 sm:py-20 bg-slate-900 text-slate-100 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+        <div className="text-center max-w-2xl mx-auto space-y-3 mb-9">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold uppercase tracking-wider">
             <Sparkles className="w-4 h-4" />
             <span>خدماتنا المتخصصة</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            حلول متكاملة لبناء وتطوير المنتجات الرقمية والفرق
+            كل ما يحتاجه منتجك في مكان واحد
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-            نغطي كافة مراحل بناء المنتج الرقمي بدءاً من بحث وتصميم تجربة المستخدم، بناء أنظمة التصميم، صياغة النصوص الدقيقة، وصولاً لفرق التطوير والتدريب المباشر.
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+            اختر الخدمة المناسبة، واطّلع على المخرجات والتكلفة المبدئية دون تشتيت.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           <button
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all ${
@@ -88,19 +88,19 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredServices.map((service) => {
             const Icon = getIcon(service.iconName);
             return (
               <div
                 key={service.id}
-                className="bg-slate-950/80 rounded-3xl p-7 border border-slate-800 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between group hover:shadow-2xl hover:shadow-orange-950/40 relative"
+                className="bg-slate-950/80 rounded-2xl p-5 border border-slate-800 hover:border-orange-500/50 transition-all duration-300 flex flex-col justify-between group relative"
                 id={`service-card-${service.id}`}
               >
                 {/* Top Badge */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-orange-600/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:scale-110 group-hover:bg-orange-600 group-hover:text-white transition-all">
-                    <Icon className="w-6 h-6" />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-orange-600/10 border border-orange-500/30 flex items-center justify-center text-orange-400 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    <Icon className="w-5 h-5" />
                   </div>
                   <span className="px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-medium text-slate-400">
                     {service.badge}
@@ -108,8 +108,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 {/* Title & Description */}
-                <div className="space-y-3 mb-6">
-                  <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
+                <div className="space-y-2 mb-4">
+                  <h3 className="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-slate-400 text-xs text-orange-400/80 font-mono">
@@ -121,9 +121,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 </div>
 
                 {/* Top Deliverables bullets */}
-                <div className="space-y-2 mb-8 bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80">
+                <div className="space-y-2 mb-5 bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/80">
                   <span className="text-xs font-semibold text-slate-400 block mb-2">أبرز المخرجات:</span>
-                  {service.deliverables.slice(0, 3).map((item, idx) => (
+                  {service.deliverables.slice(0, 2).map((item, idx) => (
                     <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                       <span>{item}</span>
@@ -131,13 +131,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   ))}
                   {service.deliverables.length > 3 && (
                     <p className="text-[11px] text-orange-400 pt-1 font-medium">
-                      +{service.deliverables.length - 3} مخرجات إضافية ومستندات قياسية...
+                      +{service.deliverables.length - 2} مخرجات إضافية
                     </p>
                   )}
                 </div>
 
                 {/* Card Actions */}
-                <div className="space-y-3 pt-4 border-t border-slate-800/80">
+                <div className="space-y-3 pt-3 border-t border-slate-800/80">
                   <div className="flex items-center justify-between text-xs text-slate-400">
                     <span>يبدأ من:</span>
                     <span className="font-bold text-slate-200">{service.pricingStartsFrom}</span>
