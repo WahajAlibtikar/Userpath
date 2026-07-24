@@ -1,0 +1,6 @@
+{
+  "name": "Userpath",
+  "description": "استوديو Userpath المتخصص في خدمات تصميم تجربة المستخدم (UX/UI)، أنظمة التصميم، كتابة تجربة المستخدم، موارد التطوير والتدريب الاحترافي.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
