@@ -267,97 +267,43 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
             </div>
 
             <div className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--card)] p-4 shadow-2xl shadow-orange-950/10">
-                <div className="absolute -left-16 -top-16 h-52 w-52 rounded-full bg-orange-500/12 blur-3xl" />
-                <svg
-                  viewBox="0 0 480 430"
-                  role="img"
-                  aria-labelledby="research-journey-title research-journey-desc"
-                  className="relative h-[430px] w-full"
-                >
-                  <title id="research-journey-title">رحلة فهم المستخدم</title>
-                  <desc id="research-journey-desc">رسم تجريدي يوضح انتقال المعرفة من المستخدم إلى البحث ثم إلى القرار</desc>
-                  <defs>
-                    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-                      <circle cx="2" cy="2" r="1.5" fill="var(--subtle)" opacity="0.25" />
-                    </pattern>
-                    <linearGradient id="orange-flow" x1="1" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#fb923c" />
-                      <stop offset="100%" stopColor="#f97316" />
-                    </linearGradient>
-                    <filter id="soft-shadow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feDropShadow dx="0" dy="10" stdDeviation="12" floodColor="#f97316" floodOpacity="0.14" />
-                    </filter>
-                  </defs>
+              <div
+                className="mesh-stage group relative h-[462px] overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[#090b11] shadow-2xl shadow-orange-950/20"
+                onPointerMove={(event) => {
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+                  const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+                  event.currentTarget.style.setProperty('--mx', x.toFixed(3));
+                  event.currentTarget.style.setProperty('--my', y.toFixed(3));
+                }}
+                onPointerLeave={(event) => {
+                  event.currentTarget.style.setProperty('--mx', '0');
+                  event.currentTarget.style.setProperty('--my', '0');
+                }}
+                aria-label="خلفية شبكية متحركة تعبّر عن تدفق أفكار المستخدم"
+              >
+                <div className="mesh-base absolute inset-0" />
+                <div className="mesh-orb mesh-orb-one absolute h-[310px] w-[310px] rounded-full" />
+                <div className="mesh-orb mesh-orb-two absolute h-[280px] w-[280px] rounded-full" />
+                <div className="mesh-orb mesh-orb-three absolute h-[240px] w-[240px] rounded-full" />
+                <div className="mesh-orb mesh-orb-four absolute h-[190px] w-[190px] rounded-full" />
+                <div className="mesh-grid absolute inset-0 opacity-30" />
+                <div className="mesh-noise absolute inset-0 opacity-[0.055]" />
 
-                  <rect x="0" y="0" width="480" height="430" rx="28" fill="url(#dot-grid)" />
+                <div className="mesh-ring absolute left-1/2 top-1/2 h-[285px] w-[285px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10" />
+                <div className="mesh-ring mesh-ring-delay absolute left-1/2 top-1/2 h-[390px] w-[390px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-orange-300/10" />
 
-                  <path
-                    d="M395 110 C335 105 334 202 272 208 C208 214 218 316 88 315"
-                    fill="none"
-                    stroke="var(--border)"
-                    strokeWidth="18"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M395 110 C335 105 334 202 272 208 C208 214 218 316 88 315"
-                    fill="none"
-                    stroke="url(#orange-flow)"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeDasharray="8 10"
-                  />
-
-                  <g transform="translate(350 64)" filter="url(#soft-shadow)">
-                    <rect width="92" height="92" rx="28" fill="var(--card)" stroke="var(--border)" strokeWidth="2" />
-                    <circle cx="46" cy="35" r="15" fill="#f97316" opacity="0.9" />
-                    <path d="M22 72 C24 52 68 52 70 72" fill="#f97316" opacity="0.35" />
-                    <circle cx="76" cy="17" r="7" fill="#22c55e" stroke="var(--card)" strokeWidth="3" />
-                  </g>
-
-                  <g transform="translate(204 156)" filter="url(#soft-shadow)">
-                    <rect width="126" height="106" rx="24" fill="var(--card)" stroke="#f97316" strokeOpacity="0.45" strokeWidth="2" />
-                    <rect x="19" y="20" width="88" height="10" rx="5" fill="var(--border)" />
-                    <rect x="19" y="42" width="56" height="8" rx="4" fill="#f97316" opacity="0.75" />
-                    <rect x="19" y="61" width="75" height="8" rx="4" fill="var(--border)" />
-                    <circle cx="98" cy="78" r="14" fill="#f97316" opacity="0.15" />
-                    <path d="M92 78 L97 83 L106 72" fill="none" stroke="#f97316" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                  </g>
-
-                  <g transform="translate(42 270)" filter="url(#soft-shadow)">
-                    <rect width="96" height="92" rx="28" fill="#f97316" />
-                    <path d="M27 48 L42 63 L70 31" fill="none" stroke="white" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
-                  </g>
-
-                  <g transform="translate(58 86)">
-                    <rect width="126" height="70" rx="18" fill="var(--soft)" stroke="var(--border)" />
-                    <circle cx="26" cy="24" r="7" fill="#f97316" />
-                    <rect x="43" y="18" width="62" height="9" rx="4.5" fill="var(--border)" />
-                    <rect x="20" y="42" width="86" height="8" rx="4" fill="var(--border)" opacity="0.65" />
-                  </g>
-
-                  <g transform="translate(300 302)">
-                    <rect width="132" height="62" rx="18" fill="var(--soft)" stroke="var(--border)" />
-                    <rect x="20" y="17" width="19" height="28" rx="6" fill="#f97316" opacity="0.35" />
-                    <rect x="48" y="27" width="19" height="18" rx="6" fill="#f97316" opacity="0.65" />
-                    <rect x="76" y="10" width="19" height="35" rx="6" fill="#f97316" />
-                    <circle cx="111" cy="23" r="7" fill="#22c55e" />
-                  </g>
-
-                  {[145, 176, 330].map((x, index) => (
-                    <circle key={x} cx={x} cy={index === 2 ? 149 : 333 - index * 42} r="5" fill="#f97316" opacity={0.45 + index * 0.2} />
-                  ))}
-                </svg>
-
-                <div className="absolute inset-x-7 bottom-7 flex items-center justify-between gap-4 rounded-2xl border border-[var(--border)] bg-[var(--header)] p-4 backdrop-blur-lg">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-orange-500">User → Insight → Decision</p>
-                    <p className="mt-1 text-xs font-semibold text-[var(--text)]">نحوّل فهم المستخدم إلى قرار أوضح.</p>
+                <div className="mesh-copy absolute inset-x-7 bottom-7 z-10 rounded-2xl border border-white/10 bg-black/25 p-5 text-white backdrop-blur-xl">
+                  <div className="mb-3 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.24em] text-orange-300">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange-400" />
+                    Userpath / Experience Lab
                   </div>
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-orange-500 text-white">
-                    <ArrowUpLeft className="h-4 w-4" />
-                  </span>
+                  <p className="max-w-xs text-lg font-black leading-7">نحوّل الضوضاء إلى فهم، والفهم إلى تجربة واضحة.</p>
                 </div>
+
+                <span className="mesh-float absolute right-7 top-7 z-10 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] font-bold tracking-wider text-white/80 backdrop-blur-md">
+                  HUMAN CENTERED
+                </span>
               </div>
             </div>
           </div>
@@ -461,6 +407,82 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
           <a href="mailto:info@userpath.sa" className="transition hover:text-orange-400">info@userpath.sa</a>
         </div>
       </footer>
+
+      <style>{`
+        .mesh-stage { --mx: 0; --my: 0; isolation: isolate; }
+        .mesh-base {
+          background:
+            radial-gradient(circle at 18% 18%, rgba(249,115,22,.22), transparent 34%),
+            radial-gradient(circle at 82% 76%, rgba(99,102,241,.16), transparent 38%),
+            linear-gradient(145deg, #090b11 0%, #111018 48%, #08090d 100%);
+        }
+        .mesh-orb {
+          filter: blur(46px);
+          mix-blend-mode: screen;
+          will-change: transform;
+          transition: transform .9s cubic-bezier(.16,1,.3,1);
+        }
+        .mesh-orb-one {
+          left: -14%; top: -12%;
+          background: #ff5a00;
+          opacity: .9;
+          animation: mesh-one 11s ease-in-out infinite alternate;
+          transform: translate(calc(var(--mx) * 18px), calc(var(--my) * 18px));
+        }
+        .mesh-orb-two {
+          right: -18%; top: 12%;
+          background: #ff9a3d;
+          opacity: .66;
+          animation: mesh-two 14s ease-in-out infinite alternate;
+          transform: translate(calc(var(--mx) * -22px), calc(var(--my) * -22px));
+        }
+        .mesh-orb-three {
+          left: 22%; bottom: -22%;
+          background: #5b5ce2;
+          opacity: .52;
+          animation: mesh-three 13s ease-in-out infinite alternate;
+          transform: translate(calc(var(--mx) * 28px), calc(var(--my) * 28px));
+        }
+        .mesh-orb-four {
+          right: 14%; bottom: 20%;
+          background: #ec3f72;
+          opacity: .36;
+          animation: mesh-four 9s ease-in-out infinite alternate;
+        }
+        .mesh-grid {
+          background-image:
+            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+          background-size: 42px 42px;
+          mask-image: linear-gradient(to bottom, black, transparent 82%);
+          transform: perspective(600px) rotateX(58deg) scale(1.5) translateY(-8%);
+          transform-origin: top center;
+          animation: grid-drift 16s linear infinite;
+        }
+        .mesh-noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E");
+        }
+        .mesh-ring { animation: ring-breathe 6s ease-in-out infinite; }
+        .mesh-ring-delay { animation-delay: -3s; }
+        .mesh-copy, .mesh-float {
+          transform: translate(calc(var(--mx) * 9px), calc(var(--my) * 9px));
+          transition: transform .8s cubic-bezier(.16,1,.3,1);
+        }
+        .mesh-float { transform: translate(calc(var(--mx) * -12px), calc(var(--my) * -12px)); }
+        @keyframes mesh-one { to { translate: 52px 68px; scale: 1.16; } }
+        @keyframes mesh-two { to { translate: -64px 72px; scale: .86; } }
+        @keyframes mesh-three { to { translate: 58px -74px; scale: 1.2; } }
+        @keyframes mesh-four { to { translate: -42px -58px; scale: 1.14; } }
+        @keyframes ring-breathe { 50% { scale: 1.08; opacity: .45; } }
+        @keyframes grid-drift { to { background-position: 42px 42px; } }
+        @media (prefers-reduced-motion: reduce) {
+          .mesh-stage *, .mesh-stage *::before, .mesh-stage *::after {
+            animation-duration: .001ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .001ms !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
