@@ -124,30 +124,79 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
     document.documentElement.style.colorScheme = theme;
   }, [theme]);
 
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const progress = document.querySelector<HTMLElement>('.scroll-progress');
+
+    if (reducedMotion) {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.14, rootMargin: '0px 0px -7% 0px' },
+      );
+      revealItems.forEach((item) => observer.observe(item));
+
+      let frame = 0;
+      const updateProgress = () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const distance = document.documentElement.scrollHeight - window.innerHeight;
+          const ratio = distance > 0 ? window.scrollY / distance : 0;
+          progress?.style.setProperty('--scroll', String(Math.min(1, Math.max(0, ratio))));
+        });
+      };
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+
+      return () => {
+        observer.disconnect();
+        window.removeEventListener('scroll', updateProgress);
+        cancelAnimationFrame(frame);
+      };
+    }
+  }, []);
+
   const palette = theme === 'dark'
     ? {
-        '--page-bg': '#080b0f',
-        '--surface': '#0d1117',
-        '--card': '#080b0f',
-        '--header': 'rgba(8, 11, 15, 0.88)',
-        '--text': '#ffffff',
-        '--muted': '#94a3b8',
-        '--subtle': '#64748b',
-        '--border': 'rgba(255, 255, 255, 0.08)',
-        '--soft': 'rgba(255, 255, 255, 0.035)',
-        '--hover': 'rgba(255, 255, 255, 0.07)',
+        '--page-bg': '#0b2033',
+        '--surface': '#132e49',
+        '--card': '#102941',
+        '--header': 'rgba(11, 32, 51, 0.88)',
+        '--text': '#fff9f4',
+        '--muted': '#b7c9d8',
+        '--subtle': '#7fa2bc',
+        '--border': 'rgba(252, 190, 141, 0.14)',
+        '--soft': 'rgba(36, 84, 120, 0.25)',
+        '--hover': 'rgba(252, 190, 141, 0.1)',
+        '--accent': '#f48935',
+        '--accent-soft': '#fcbe8d',
+        '--brand-blue': '#245478',
+        '--brand-navy': '#132e49',
       }
     : {
-        '--page-bg': '#faf9f7',
-        '--surface': '#f1f0ed',
+        '--page-bg': '#fffaf6',
+        '--surface': '#f8eee7',
         '--card': '#ffffff',
-        '--header': 'rgba(250, 249, 247, 0.9)',
-        '--text': '#172033',
-        '--muted': '#526078',
-        '--subtle': '#778297',
-        '--border': 'rgba(23, 32, 51, 0.11)',
-        '--soft': 'rgba(23, 32, 51, 0.035)',
-        '--hover': 'rgba(23, 32, 51, 0.065)',
+        '--header': 'rgba(255, 250, 246, 0.9)',
+        '--text': '#132e49',
+        '--muted': '#49677e',
+        '--subtle': '#6f8799',
+        '--border': 'rgba(19, 46, 73, 0.12)',
+        '--soft': 'rgba(252, 190, 141, 0.16)',
+        '--hover': 'rgba(244, 137, 53, 0.1)',
+        '--accent': '#f48935',
+        '--accent-soft': '#fcbe8d',
+        '--brand-blue': '#245478',
+        '--brand-navy': '#132e49',
       };
 
   const goTo = (id: string) => {
@@ -161,6 +210,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
       style={palette as React.CSSProperties}
       data-theme={theme}
     >
+      <div className="scroll-progress fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-[var(--accent)]" />
       <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--header)] backdrop-blur-xl transition-colors duration-300">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2.5">
@@ -224,7 +274,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
           </div>
 
           <div className="relative mx-auto grid min-h-[680px] max-w-6xl items-center gap-12 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-24">
-            <div className="space-y-7 lg:col-span-7">
+            <div className="space-y-7 lg:col-span-7" data-reveal="right">
               <div className="inline-flex items-center gap-2 rounded-full border border-orange-400/20 bg-orange-400/8 px-3 py-1.5 text-xs font-bold text-orange-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-orange-400" />
                 شركة سعودية متخصصة في تجربة المستخدم
@@ -266,7 +316,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
               </div>
             </div>
 
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-5" data-reveal="left">
               <div
                 className="mesh-stage group relative h-[462px] overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[#090b11] shadow-2xl shadow-orange-950/20"
                 onPointerMove={(event) => {
@@ -311,7 +361,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
 
         <section id="services" className="border-y border-[var(--border)] bg-[var(--surface)] py-20 transition-colors duration-300 sm:py-24">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
-            <div className="mb-10 max-w-2xl space-y-3">
+            <div className="mb-10 max-w-2xl space-y-3" data-reveal="up">
               <span className="text-xs font-black tracking-widest text-orange-400">خدماتنا</span>
               <h2 className="text-3xl font-black tracking-tight sm:text-5xl">من السؤال الصحيح إلى تجربة أفضل.</h2>
               <p className="leading-7 text-[var(--muted)]">خدمات متكاملة تساعدك على الفهم، التصميم، الاختبار، والتحسين المستمر.</p>
@@ -321,6 +371,8 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
               {services.map(({ icon: Icon, title, label, text }, index) => (
                 <article
                   key={title}
+                  data-reveal="up"
+                  style={{ '--delay': `${Math.min(index, 5) * 70}ms` } as React.CSSProperties}
                   className="group flex gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 transition hover:border-orange-400/35 hover:bg-orange-400/[0.035]"
                 >
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-orange-400/20 bg-orange-400/8 text-orange-400">
@@ -343,7 +395,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         <section id="why-us" className="py-20 sm:py-24">
           <div className="mx-auto max-w-6xl px-5 sm:px-8">
             <div className="grid gap-12 lg:grid-cols-12">
-              <div className="space-y-5 lg:col-span-4">
+              <div className="space-y-5 lg:col-span-4" data-reveal="right">
                 <span className="text-xs font-black tracking-widest text-orange-400">لماذا مسار المستخدم؟</span>
                 <h2 className="text-3xl font-black leading-tight tracking-tight sm:text-4xl">بحث محلي.<br />قرارات أوضح.</h2>
                 <p className="leading-7 text-[var(--muted)]">
@@ -352,8 +404,13 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
-                {values.map(({ icon: Icon, title, text }) => (
-                  <article key={title} className="rounded-2xl border border-[var(--border)] bg-[var(--soft)] p-5">
+                {values.map(({ icon: Icon, title, text }, index) => (
+                  <article
+                    key={title}
+                    data-reveal="up"
+                    style={{ '--delay': `${index * 90}ms` } as React.CSSProperties}
+                    className="rounded-2xl border border-[var(--border)] bg-[var(--soft)] p-5"
+                  >
                     <Icon className="mb-5 h-5 w-5 text-orange-400" />
                     <h3 className="mb-2 font-bold">{title}</h3>
                     <p className="text-sm leading-7 text-[var(--muted)]">{text}</p>
@@ -362,7 +419,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
               </div>
             </div>
 
-            <div className="mt-14 border-t border-[var(--border)] pt-8">
+            <div className="mt-14 border-t border-[var(--border)] pt-8" data-reveal="up">
               <p className="mb-5 text-xs font-bold text-[var(--subtle)]">خبرة عبر قطاعات متنوعة</p>
               <div className="flex flex-wrap gap-2">
                 {industries.map((industry) => (
@@ -376,7 +433,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         </section>
 
         <section id="contact" className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24">
-          <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-orange-400/25 bg-orange-500 p-7 text-[#160a02] sm:p-12">
+          <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-orange-400/25 bg-orange-500 p-7 text-[#160a02] sm:p-12" data-reveal="scale">
             <div className="absolute -left-20 -top-24 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
             <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
               <div className="max-w-2xl space-y-3">
@@ -397,7 +454,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         </section>
       </main>
 
-      <footer className="border-t border-[var(--border)] py-8">
+      <footer className="border-t border-[var(--border)] py-8" data-reveal="up">
         <div className="mx-auto flex max-w-6xl flex-col justify-between gap-5 px-5 text-xs text-[var(--subtle)] sm:px-8 md:flex-row">
           <div className="flex items-center gap-2">
             <Layers3 className="h-4 w-4 text-orange-500" />
@@ -409,12 +466,43 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
       </footer>
 
       <style>{`
+        .scroll-progress {
+          transform: scaleX(var(--scroll, 0));
+          transform-origin: left center;
+          box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 70%, transparent);
+        }
+        [data-reveal] {
+          opacity: 0;
+          transition:
+            opacity .85s cubic-bezier(.16,1,.3,1),
+            transform .85s cubic-bezier(.16,1,.3,1);
+          transition-delay: var(--delay, 0ms);
+          will-change: opacity, transform;
+        }
+        [data-reveal="up"] { transform: translateY(48px); }
+        [data-reveal="right"] { transform: translateX(44px); }
+        [data-reveal="left"] { transform: translateX(-44px); }
+        [data-reveal="scale"] { transform: scale(.94); }
+        [data-reveal].is-visible { opacity: 1; transform: none; }
+        article[data-reveal] {
+          transition:
+            opacity .8s cubic-bezier(.16,1,.3,1),
+            transform .8s cubic-bezier(.16,1,.3,1),
+            border-color .25s ease,
+            background-color .25s ease;
+          transition-delay: var(--delay, 0ms);
+        }
+        article[data-reveal].is-visible:hover { transform: translateY(-5px); }
+        .bg-orange-500 { background-color: var(--accent) !important; }
+        .text-orange-500, .text-orange-400, .text-orange-300 { color: var(--accent) !important; }
+        .border-orange-400\\/25, .border-orange-400\\/20 { border-color: color-mix(in srgb, var(--accent) 28%, transparent) !important; }
+
         .mesh-stage { --mx: 0; --my: 0; isolation: isolate; }
         .mesh-base {
           background:
-            radial-gradient(circle at 18% 18%, rgba(249,115,22,.22), transparent 34%),
-            radial-gradient(circle at 82% 76%, rgba(99,102,241,.16), transparent 38%),
-            linear-gradient(145deg, #090b11 0%, #111018 48%, #08090d 100%);
+            radial-gradient(circle at 18% 18%, rgba(244,137,53,.28), transparent 34%),
+            radial-gradient(circle at 82% 76%, rgba(36,84,120,.4), transparent 38%),
+            linear-gradient(145deg, #0b2033 0%, #132e49 48%, #081725 100%);
         }
         .mesh-orb {
           filter: blur(46px);
@@ -424,29 +512,29 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         }
         .mesh-orb-one {
           left: -14%; top: -12%;
-          background: #ff5a00;
+          background: #f48935;
           opacity: .9;
           animation: mesh-one 11s ease-in-out infinite alternate;
           transform: translate(calc(var(--mx) * 18px), calc(var(--my) * 18px));
         }
         .mesh-orb-two {
           right: -18%; top: 12%;
-          background: #ff9a3d;
+          background: #fcbe8d;
           opacity: .66;
           animation: mesh-two 14s ease-in-out infinite alternate;
           transform: translate(calc(var(--mx) * -22px), calc(var(--my) * -22px));
         }
         .mesh-orb-three {
           left: 22%; bottom: -22%;
-          background: #5b5ce2;
+          background: #245478;
           opacity: .52;
           animation: mesh-three 13s ease-in-out infinite alternate;
           transform: translate(calc(var(--mx) * 28px), calc(var(--my) * 28px));
         }
         .mesh-orb-four {
           right: 14%; bottom: 20%;
-          background: #ec3f72;
-          opacity: .36;
+          background: #f48935;
+          opacity: .3;
           animation: mesh-four 9s ease-in-out infinite alternate;
         }
         .mesh-grid {
@@ -476,6 +564,7 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         @keyframes ring-breathe { 50% { scale: 1.08; opacity: .45; } }
         @keyframes grid-drift { to { background-position: 42px 42px; } }
         @media (prefers-reduced-motion: reduce) {
+          [data-reveal] { opacity: 1 !important; transform: none !important; }
           .mesh-stage *, .mesh-stage *::before, .mesh-stage *::after {
             animation-duration: .001ms !important;
             animation-iteration-count: 1 !important;
