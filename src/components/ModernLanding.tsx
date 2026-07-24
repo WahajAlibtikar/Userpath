@@ -492,16 +492,16 @@ export const ModernLanding: React.FC<ModernLandingProps> = ({ onOpenProposal }) 
         <section id="contact" className="px-5 pb-20 pt-4 sm:px-8 sm:pb-24">
           <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-orange-400/25 bg-orange-500 p-7 text-[#160a02] sm:p-12" data-reveal="scale">
             <div className="absolute -left-20 -top-24 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
-            <div className="relative flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-              <div className="max-w-2xl space-y-3">
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-7 text-center">
+              <div className="space-y-3">
                 <h2 className="text-3xl font-black tracking-tight sm:text-5xl">لست متأكدًا من أين تبدأ؟</h2>
-                <p className="max-w-xl text-sm font-medium leading-7 text-orange-950/75 sm:text-base">
+                <p className="mx-auto max-w-2xl text-sm font-medium leading-7 text-orange-950/75 sm:text-base">
                   أخبرنا عن مشروعك بشكل مختصر، وسنشرح لك الخدمة المناسبة بكل وضوح وصدق.
                 </p>
               </div>
               <button
                 onClick={onOpenProposal}
-                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#080b0f] px-6 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#080b0f] px-7 py-3.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
               >
                 تواصل معنا
                 <ArrowUpLeft className="h-4 w-4" />
