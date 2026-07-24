@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ServicesSection } from './components/ServicesSection';
-import { UxWritingPlayground } from './components/UxWritingPlayground';
-import { DesignSystemViewer } from './components/DesignSystemViewer';
-import { DevResourcesCalculator } from './components/DevResourcesCalculator';
-import { TrainingHub } from './components/TrainingHub';
 import { CaseStudiesSection } from './components/CaseStudiesSection';
 import { TestimonialsAndFaq } from './components/TestimonialsAndFaq';
 import { Footer } from './components/Footer';
@@ -15,7 +11,6 @@ import { ServiceId } from './types';
 export default function App() {
   const [proposalOpen, setProposalOpen] = useState(false);
   const [preSelectedService, setPreSelectedService] = useState<ServiceId | undefined>(undefined);
-  const [preConfiguredDevNote, setPreConfiguredDevNote] = useState<string | undefined>(undefined);
   const [activeSection, setActiveSection] = useState<string>('services');
 
   // Handle RTL direction & font defaults
@@ -26,19 +21,6 @@ export default function App() {
 
   const handleOpenProposalForService = (serviceId: ServiceId) => {
     setPreSelectedService(serviceId);
-    setPreConfiguredDevNote(undefined);
-    setProposalOpen(true);
-  };
-
-  const handleOpenProposalWithDevConfig = (configNote: string) => {
-    setPreSelectedService('app-dev');
-    setPreConfiguredDevNote(configNote);
-    setProposalOpen(true);
-  };
-
-  const handleOpenProposalForTraining = (courseTitle: string) => {
-    setPreSelectedService('training');
-    setPreConfiguredDevNote(courseTitle);
     setProposalOpen(true);
   };
 
@@ -56,7 +38,6 @@ export default function App() {
       <Navbar
         onOpenProposal={() => {
           setPreSelectedService(undefined);
-          setPreConfiguredDevNote(undefined);
           setProposalOpen(true);
         }}
         activeSection={activeSection}
@@ -70,7 +51,6 @@ export default function App() {
         <HeroSection
           onOpenProposal={() => {
             setPreSelectedService(undefined);
-            setPreConfiguredDevNote(undefined);
             setProposalOpen(true);
           }}
           onSelectService={handleSelectService}
@@ -80,22 +60,6 @@ export default function App() {
         <ServicesSection
           onSelectServiceForProposal={handleOpenProposalForService}
           selectedServiceId={preSelectedService}
-        />
-
-        {/* Interactive UX Writing Playground */}
-        <UxWritingPlayground />
-
-        {/* Design System & Token Inspector */}
-        <DesignSystemViewer />
-
-        {/* App Dev Resources Calculator */}
-        <DevResourcesCalculator
-          onOpenProposalWithDevConfig={handleOpenProposalWithDevConfig}
-        />
-
-        {/* Corporate Training & Bootcamps */}
-        <TrainingHub
-          onOpenProposalForTraining={handleOpenProposalForTraining}
         />
 
         {/* Case Studies Showcase */}
@@ -110,7 +74,6 @@ export default function App() {
       <Footer
         onOpenProposal={() => {
           setPreSelectedService(undefined);
-          setPreConfiguredDevNote(undefined);
           setProposalOpen(true);
         }}
         onSelectService={handleSelectService}
@@ -121,7 +84,6 @@ export default function App() {
         isOpen={proposalOpen}
         onClose={() => setProposalOpen(false)}
         preSelectedService={preSelectedService}
-        preConfiguredDevNote={preConfiguredDevNote}
       />
 
     </div>
