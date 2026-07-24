@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowLeft, Sparkles, CheckCircle2, Layers, Code2, Layout } from 'lucide-react';
-import heroBanner from '../assets/images/studio_hero_banner_1784865160789.jpg';
 
 interface HeroSectionProps {
   onOpenProposal: () => void;
@@ -8,6 +7,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenProposal, onSelectService }) => {
+  const heroBanner = new URL('../assets/images/studio_hero_banner_1784865160789.jpg', import.meta.url).href;
   const highlights = [
     'تصميم وتجربة مستخدم',
     'أنظمة تصميم قابلة للتوسع',
